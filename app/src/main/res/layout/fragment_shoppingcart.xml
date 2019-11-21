@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="购物车"
+        android:id="@+id/tv_title"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp" />
+
+    <View
+        android:id="@+id/view_s"
+        android:layout_below="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/list_divider"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@+id/view_s"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <!--RecycleView在ScrollView中会自动一次性加载所有的条目
+            这个问题也是无意中发现的，起初在刷新时发现会有少许的卡顿，一直找不到原因，今天因为其他的问题，在log时发现RecycleView自动把所有的条目一次
+            性加载完了（正确应该是只加载可见条目，然后在滑动时不断复用），多次尝试后发现是ScrollView嵌套的问题。不知道为什么会这样,有发现呢同样问题
+            的朋友吗，有什么好的解决方案？
+
+            因为是购物车，需要统计金额 checkbox选中则加入集合中，所以需要RecyclerView一次性加载全部数据-->
+   <android.support.v4.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1">
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/background"
+        android:id="@+id/rv_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </android.support.v7.widget.RecyclerView>
+   </android.support.v4.widget.NestedScrollView>
+
+    <FrameLayout
+        android:layout_below="@+id/rv_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <!--购物车栏第1部分：购物车没有商品时显示该部分-->
+        <LinearLayout
+            android:id="@+id/ll_bottom_card_layout_01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shop_detail_my_cart_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/icon_cart"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="购物车是空的"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_send_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="0元起送"
+                android:textColor="@color/shop_detail_my_cart_text"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <!--购物车栏第2部分：购物车有商品时显示-->
+        <LinearLayout
+            android:id="@+id/ll_bottom_card_layout_02"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clickable="true"
+            android:visibility="visible"
+            android:gravity="center_vertical"
+            android:onClick="onClick"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/checkAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:background="@color/shop_detail_my_cart_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="70dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:id="@+id/tv_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:text="共￥10"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_delivery_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:text="另需付配送费0元"
+                    android:textColor="@color/shop_detail_my_cart_text"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="wrap_content"
+                android:minWidth="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/btn_commit_order"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="选好了"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    </LinearLayout>
+
+
+
+    <!--第2部分：左下角的购物车图标, 盖在底部栏上面-->
+    <FrameLayout
+        android:id="@+id/fl_mycart_zoom"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp">
+
+
+
+        <ImageButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/shape_mycart_bg"
+            android:src="@drawable/icon_cart"/>
+
+        <TextView
+            android:id="@+id/tv_select_count"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right|top"
+            android:background="@drawable/shape_unread_count_bg"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+    </FrameLayout>
+
+    <!--第3部分：用来作抛物线动画的控件-->
+    <ImageButton
+        android:id="@+id/ib_plus"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/btn_add_normal"
+        android:visibility="invisible"/>
+</RelativeLayout>

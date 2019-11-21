@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">红人GO</string>
+    <string name="edittext_search">请输入需要搜索的商品</string>
+
+</resources>
