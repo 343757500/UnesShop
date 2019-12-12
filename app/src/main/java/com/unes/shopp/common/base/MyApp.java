@@ -2,9 +2,6 @@ package com.unes.shopp.common.base;
 
 import android.app.Application;
 
-import com.squareup.leakcanary.LeakCanary;
-
-import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -19,14 +16,7 @@ public class MyApp extends Application {
 	public void onCreate() {
 		super.onCreate();
 		Global.init(this);
-		initLeakCanary();
 	}
 
 
-	private void initLeakCanary() {
-		if (LeakCanary.isInAnalyzerProcess(this)) {
-			return;
-		}
-		LeakCanary.install(this);
-	}
 }

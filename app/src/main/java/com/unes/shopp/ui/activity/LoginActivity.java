@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.unes.shopp.R;
 import com.unes.shopp.common.base.BaseActivity;
+import com.unes.shopp.common.base.Const;
 import com.unes.shopp.common.util.SharedPreUtil;
 import com.unes.shopp.model.bean.LoginInfo;
 import com.unes.shopp.model.protocol.IHttpService;
@@ -58,7 +59,7 @@ public class LoginActivity extends BaseActivity {
 
         if (reqType== IHttpService.TYPE_LOGININFO){
             LoginInfo loginInfo= (LoginInfo) obj.obj;
-            SharedPreUtil.saveInt(this,"Uid",loginInfo.getResult().getUid());
+            SharedPreUtil.saveInt(this, Const.TICKET,loginInfo.getResult().getUid());
             this.setResult(2);
             this.finish();
         }

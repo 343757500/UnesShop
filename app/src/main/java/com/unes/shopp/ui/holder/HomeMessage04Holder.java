@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.unes.shopp.R;
+import com.unes.shopp.common.base.Const;
 import com.unes.shopp.common.ui.BaseAdapterRV;
 import com.unes.shopp.common.ui.BaseHolderRV;
 import com.unes.shopp.common.util.SharedPreUtil;
@@ -88,7 +89,7 @@ public class HomeMessage04Holder extends BaseHolderRV{
                 List result = new ArrayList();
                 result.add(json.toString());
 
-                int uid = SharedPreUtil.getInt(context, "Uid", 0);
+                int uid = SharedPreUtil.getInt(context, Const.TICKET, 0);
                 AddShopCartInfo addShopCartInfo=new AddShopCartInfo();
                 addShopCartInfo.setTicket(uid+"");
                 addShopCartInfo.setItem_id(result.toString());

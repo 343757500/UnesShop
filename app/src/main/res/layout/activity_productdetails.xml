@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:text="商品详情"
+        android:id="@+id/tv_title"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp" />
+
+    <View
+        android:id="@+id/view_s"
+        android:layout_below="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/list_divider"/>
+
+
+
+<!--    NestedScrollView嵌套RecyclerView只显示一行的问题和NestedScrollView会滑动，RecyclerView也会滑动的问题，效果需要是
+    NestedScrollView滑动，RecyclerView只是要效果为显示而已。。
+    解决办法：设置RecyclerView的item holder   的  layout_height属性为wrap_content
+    设置RecyclerView的item_layout最外层的容器layout_height属性为wrap_content
+    最好采用ll.addview的方式添加imagview-->
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_below="@+id/view_s"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+
+               <LinearLayout
+                   android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                   <LinearLayout
+                       android:id="@+id/ll1"
+                       android:orientation="vertical"
+                       android:layout_width="match_parent"
+                       android:layout_height="400dp">
+
+                     <RelativeLayout
+                            android:layout_weight="4"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            >
+                            <com.daimajia.slider.library.SliderLayout
+                                android:id="@+id/slider_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+                            <com.daimajia.slider.library.Indicators.PagerIndicator
+                                custom:auto_cycle="false"
+                                android:id="@+id/custom_indicator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="10dp"
+                                custom:selected_height="3dp"
+                                custom:selected_padding_left="2dp"
+                                custom:selected_padding_right="2dp"
+                                custom:selected_width="16dp"
+                                custom:shape="oval"
+                                custom:unselected_height="3dp"
+                                custom:unselected_padding_left="2dp"
+                                custom:unselected_padding_right="2dp"
+                                custom:unselected_width="16dp"
+                                app:selected_color="@color/black"
+                                />
+
+                     </RelativeLayout>
+
+                     <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                         android:layout_weight="1"
+                        android:layout_height="0dp">
+                       <RelativeLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="25dp">
+                           <TextView
+                               android:textColor="@color/red"
+                               android:textSize="20sp"
+                               android:text="￥200"
+                               android:textStyle="bold"
+                               android:id="@+id/tv_price"
+                               android:layout_marginLeft="5dp"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content" />
+                           <TextView
+                               android:text="￥1500"
+                               android:layout_toRightOf="@+id/tv_price"
+                               android:layout_alignParentBottom="true"
+                               android:layout_marginLeft="5dp"
+                               android:id="@+id/tv_allprice"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content" />
+                           <TextView
+                               android:textColor="@color/red"
+                               android:background="@color/title_bar_bg_pressed"
+                               android:layout_toRightOf="@+id/tv_allprice"
+                               android:layout_alignParentBottom="true"
+                               android:text="5.0折"
+                               android:textStyle="bold"
+                               android:id="@+id/tv_discount"
+                               android:layout_marginLeft="5dp"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content" />
+                           <TextView
+                               android:layout_alignParentBottom="true"
+                               android:layout_marginRight="5dp"
+                               android:text="赚￥200.01"
+                               android:layout_alignParentRight="true"
+                               android:id="@+id/tv_netprofit"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content" />
+
+                       </RelativeLayout>
+                           <TextView
+                               android:textSize="18sp"
+                               android:textColor="@color/black"
+                               android:layout_marginLeft="5dp"
+                               android:text="赚￥200.01"
+                               android:layout_below="@+id/tv_netprofit"
+                               android:id="@+id/tv_name"
+                               android:paddingTop="5dp"
+                               android:textStyle="bold"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content" />
+
+
+                           <TextView
+                               android:paddingTop="5dp"
+                               android:layout_marginLeft="5dp"
+                               android:text="类型"
+                               android:layout_below="@+id/tv_name"
+                               android:id="@+id/tv_type"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content" />
+
+
+
+                            <TextView
+                                android:paddingTop="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="已售：1000件"
+                                android:layout_below="@+id/tv_type"
+                                android:id="@+id/tv_sold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+                   </LinearLayout>
+                   <View
+                       android:id="@+id/view_t"
+                       android:layout_width="match_parent"
+                       android:layout_height="8dp"
+                       android:background="@color/list_divider"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl"
+                          android:padding="5dp"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+                          <TextView
+                              android:id="@+id/tv_sucai"
+                              android:text="发表素材"
+                              android:textSize="20sp"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content" />
+
+
+                          <TextView
+                              android:padding="5dp"
+                              android:id="@+id/tv_count"
+                              android:layout_alignParentRight="true"
+                              android:layout_alignParentTop="true"
+                              android:text="查看全部  条 >"
+                              android:layout_centerVertical="true"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:id="@+id/iv_fetchItem"
+                            android:layout_below="@+id/tv_sucai"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@mipmap/icon_gwc"/>
+
+                        <TextView
+                            android:id="@+id/tv_fetchName"
+                            android:layout_toRightOf="@id/iv_fetchItem"
+                            android:layout_below="@+id/tv_sucai"
+                            android:text="优理氏私人定制"
+                            android:textSize="20sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:layout_below="@+id/tv_fetchName"
+                            android:textSize="12sp"
+                            android:layout_toRightOf="@+id/iv_fetchItem"
+                            android:text="2019-11-11 14:00:00"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        
+
+                        <TextView
+                            android:layout_below="@+id/tv_time"
+                            android:textSize="12sp"
+                            android:layout_toRightOf="@+id/iv_fetchItem"
+                            android:id="@+id/tv_content"
+                            android:text="123456789"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                        <android.support.v7.widget.RecyclerView
+                           android:layout_marginRight="20dp"
+                            android:id="@+id/rv"
+                            android:layout_below="@+id/tv_content"
+                            android:layout_toRightOf="@+id/iv_fetchItem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </android.support.v7.widget.RecyclerView>
+
+                        <TextView
+                            android:id="@+id/tv_sendCount"
+                            android:layout_below="@+id/rv"
+                            android:layout_toRightOf="@+id/iv_fetchItem"
+                            android:text="已经发圈？次"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:text="一键发圈"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/rv"
+                            android:layout_marginRight="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                      </RelativeLayout>
+
+
+                   <LinearLayout
+                       android:id="@+id/ll"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
+
+                   </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

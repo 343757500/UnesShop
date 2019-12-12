@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager {
 
     private static RetrofitManager instance;
-
+    private OkHttpClient mHttpClient;
     private RetrofitManager(){
     }
 
@@ -33,7 +33,7 @@ public class RetrofitManager {
 
     private static Retrofit mRetrofit;
     private static IHttpService mHttpService;
-
+    private static ApiInterface mApiInterface;
     public IHttpService getHttpService() {
         return mHttpService;
     }
@@ -45,5 +45,21 @@ public class RetrofitManager {
                 .build();
         mHttpService = mRetrofit.create(IHttpService.class);
     }
+
+
+    //下载文件时baseUrl不一样
+    public RetrofitManager buildRetrofit(String baseUrl) {
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .build();
+        mApiInterface = mRetrofit.create(ApiInterface.class);
+        return this;
+    }
+
+
+    public <T> T createService(Class<T> serviceClass) {
+        return mRetrofit.create(serviceClass);
+    }
+
 
 }

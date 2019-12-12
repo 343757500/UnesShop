@@ -4,10 +4,12 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.unes.shopp.R;
 import com.unes.shopp.common.base.BaseFragment;
+import com.unes.shopp.common.base.Const;
 import com.unes.shopp.common.util.SharedPreUtil;
 import com.unes.shopp.model.bean.MineInfo;
 import com.unes.shopp.model.bean.PostAllPriceInfo;
@@ -26,6 +28,7 @@ public class ConfirmationFragment extends BaseFragment {
     private RecyclerView rv;
     private TextView tv_adress;
     private ArrayList<ShoppingCartInfo.ResultBean.ItemsBean> itemsBeans;
+    private EditText edit_message;
 
     @Override
     public int getLayoutRes() {
@@ -37,6 +40,7 @@ public class ConfirmationFragment extends BaseFragment {
         rv = findView(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         tv_adress = findView(R.id.tv_adress);
+        edit_message = findView(R.id.edit_message);
 
 
         ConfirmationCartAdapter confirmationCartAdapter = new ConfirmationCartAdapter(getContext(), null);
@@ -56,7 +60,7 @@ public class ConfirmationFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        int uid = SharedPreUtil.getInt(getContext(), "Uid", 0);
+        int uid = SharedPreUtil.getInt(getContext(), Const.TICKET, 0);
         MinePresenter minePresenter = new MinePresenter(this);
         minePresenter.getMineInFo(uid+"");
         int allPrice=0;

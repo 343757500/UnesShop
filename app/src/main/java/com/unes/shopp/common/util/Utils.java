@@ -1,6 +1,9 @@
 package com.unes.shopp.common.util;
 
 import android.annotation.TargetApi;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Build;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
@@ -89,6 +92,27 @@ public class Utils {
     public static String replaceIp(String url) {
         // 匹配ip的正则表达式
         return url.replaceAll(IP_REGEXP, Const.HOST_IP);
+    }
+
+
+    /**
+     * 复制内容到剪切板
+     *
+     * @param copyStr
+     * @return
+     */
+    public static boolean copy(String copyStr, Context context) {
+        try {
+            //获取剪贴板管理器
+            ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            // 创建普通字符型ClipData
+            ClipData mClipData = ClipData.newPlainText("Label", copyStr);
+            // 将ClipData内容放到系统剪贴板里。
+            cm.setPrimaryClip(mClipData);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
 

@@ -3,17 +3,18 @@ package com.unes.shopp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unes.shopp.R;
 import com.unes.shopp.common.base.BaseActivity;
+import com.unes.shopp.common.base.Const;
 import com.unes.shopp.common.base.Global;
 import com.unes.shopp.common.util.SharedPreUtil;
 import com.unes.shopp.model.bean.AddShopCartInfo;
@@ -34,7 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.lzy.okgo.OkGo.getContext;
 
 public class ConfirmationActivity extends BaseActivity{
 
@@ -42,6 +42,8 @@ public class ConfirmationActivity extends BaseActivity{
     private TextView tv_amount;
     private TextView tv_submit;
     private MinePresenter minePresenter;
+    private ConfirmationAdapter confirmationAdapter;
+    private ViewPager vp;
 
     @Override
     public int getLayoutRes() {
@@ -56,11 +58,11 @@ public class ConfirmationActivity extends BaseActivity{
 
         Global.setAndroidNativeLightStatusBar(this,true);
         TabLayout tl = findView(R.id.tl);
-        ViewPager vp = findView(R.id.vp);
+        vp = findView(R.id.vp);
         tv_amount = findView(R.id.tv_amount);
         tv_submit = findView(R.id.tv_submit);
 
-        ConfirmationAdapter confirmationAdapter= new ConfirmationAdapter(getSupportFragmentManager(),new String[]{"门店自提","快速配送"});
+        confirmationAdapter = new ConfirmationAdapter(getSupportFragmentManager(),new String[]{"门店自提","快速配送"});
         vp.setAdapter(confirmationAdapter);
         tl.setupWithViewPager(vp);
 
@@ -86,13 +88,22 @@ public class ConfirmationActivity extends BaseActivity{
                 }
 
 
-                int uid = SharedPreUtil.getInt(getApplicationContext(), "Uid", 0);
+                int uid = SharedPreUtil.getInt(getApplicationContext(), Const.TICKET, 0);
                 AddShopCartInfo addShopCartInfo=new AddShopCartInfo();
                 addShopCartInfo.setTicket(uid+"");
                 addShopCartInfo.setItem_id(result.toString());
 
                 long adTime=(int) (System.currentTimeMillis()/1000);
-                minePresenter.posthOrder(uid+"",result.toString(),"4","1",adTime,"",0,0, 0,null,"cart","yes");
+
+                //activity获取fragment中的控件ID要 在adapter中重写setPrimaryItem（）方法，不然ragment.getView()为null
+                Fragment fragment= ((ConfirmationAdapter) vp.getAdapter()).currentFragment;
+                EditText edit_message = fragment.getView().findViewById(R.id.edit_message);
+                String msg = edit_message.getText().toString();
+                minePresenter.posthOrder(uid+"",result.toString(),"4","1",adTime,msg,0,0, 0,null,"cart","yes");
+
+                Intent intent = new Intent(getApplicationContext(),PayActivity.class);
+                startActivity(intent);
+
             }
         });
     }

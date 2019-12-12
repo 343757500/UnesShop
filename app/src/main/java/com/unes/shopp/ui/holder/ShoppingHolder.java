@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.unes.shopp.R;
+import com.unes.shopp.common.base.Const;
 import com.unes.shopp.common.ui.BaseAdapterRV;
 import com.unes.shopp.common.ui.BaseHolderRV;
 import com.unes.shopp.common.util.SharedPreUtil;
@@ -105,7 +106,7 @@ public class ShoppingHolder extends BaseHolderRV<ShoppingCartInfo.ResultBean.Ite
                 appCompatCheckBox.setChecked(map.get(bean.getItemId()));
             }
 
-            final int uid = SharedPreUtil.getInt(context, "Uid", 0);
+            final int uid = SharedPreUtil.getInt(context, Const.TICKET, 0);
 
             //如果checkbox有状态为false的，则设置全选checkbox为false   分为加载和点击
             setCheckAllBoxType(map,position);

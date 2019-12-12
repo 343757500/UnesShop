@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:id="@+id/iv_fetchItem"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/tv_fetchName"
+            android:layout_toRightOf="@id/iv_fetchItem"
+            android:text="优理氏私人定制"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_below="@+id/tv_fetchName"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/iv_fetchItem"
+            android:text="2019-11-11 14:00:00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_below="@+id/tv_time"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/iv_fetchItem"
+            android:id="@+id/tv_content"
+            android:text="123456789"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <FrameLayout
+            android:id="@+id/ll"
+            android:layout_below="@+id/tv_content"
+            android:layout_toRightOf="@+id/iv_fetchItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp">
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginRight="20dp"
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+
+
+            <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+                android:id="@+id/player_list_video"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_sendCount"
+            android:layout_below="@+id/ll"
+            android:layout_toRightOf="@+id/iv_fetchItem"
+            android:text="已经发圈？次"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tv_sendCircle"
+            android:text="一键发圈"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ll"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>

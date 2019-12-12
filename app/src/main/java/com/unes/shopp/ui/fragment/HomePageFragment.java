@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Indicators.PagerIndicator;
@@ -56,6 +58,7 @@ public class HomePageFragment extends BaseFragment {
     private ImageView iv_selected;
     private HomeMessage04Adapter homeMessage04Adapter;
     private ShoppingCartPersenter shoppingCartPersenter;
+    private RelativeLayout rl_seckill;
 
 
     public ShoppingCartPersenter getShoppingCartPersenter(){
@@ -75,6 +78,7 @@ public class HomePageFragment extends BaseFragment {
         slider_layout = findView(R.id.slider_layout);
         indicator = findView(R.id.custom_indicator);
         refreshLayout = findView(R.id.refreshLayout);
+        rl_seckill = findView(R.id.rl_seckill);
         initRecycleview();
 
         
@@ -248,7 +252,9 @@ public class HomePageFragment extends BaseFragment {
 
 
             //秒杀数据
+
             List<HomeBannerInfo.ResultBean.BannersBean._$422Bean> _$422Bean = homeBannerInfo.getResult().getBanners().get_$422();
+
             initSecKill(_$422Bean);
 
 
@@ -303,10 +309,15 @@ public class HomePageFragment extends BaseFragment {
     //秒杀活动数据
     private void initSecKill(List<HomeBannerInfo.ResultBean.BannersBean._$422Bean> bean) {
         ArrayList list=new ArrayList<>();
-        for (int i = 0; i < bean.size(); i++) {
-            list.add(bean.get(i));
+        if (bean!=null) {
+            for (int i = 0; i < bean.size(); i++) {
+                list.add(bean.get(i));
+            }
+            homeMessage02Adapter.setDatas(list);
+            rl_seckill.setVisibility(View.VISIBLE);
+        }else {
+            rl_seckill.setVisibility(View.GONE);
         }
-        homeMessage02Adapter.setDatas(list);
     }
 
     @Override

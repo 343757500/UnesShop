@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.unes.shopp.R;
 import com.unes.shopp.common.base.BaseFragment;
+import com.unes.shopp.common.base.Const;
 import com.unes.shopp.common.base.OttoBus;
 import com.unes.shopp.common.util.SharedPreUtil;
 import com.unes.shopp.model.bean.ChangeShopCartInfo;
@@ -215,7 +216,7 @@ public class ShoppingCartFragment extends BaseFragment {
     @Override
     public void initData() {
         shoppingCartPersenter = new ShoppingCartPersenter(this);
-        int uid = SharedPreUtil.getInt(getContext(), "Uid", 0);
+        int uid = SharedPreUtil.getInt(getContext(), Const.TICKET, 0);
         shoppingCartPersenter.getShoppingCartInfo(uid+"");
 
     }
@@ -241,7 +242,7 @@ public class ShoppingCartFragment extends BaseFragment {
             ChangeShopCartInfo changeShopCartInfo= (ChangeShopCartInfo) obj.obj;
 
             shoppingCartPersenter = new ShoppingCartPersenter(this);
-            int uid = SharedPreUtil.getInt(getContext(), "Uid", 0);
+            int uid = SharedPreUtil.getInt(getContext(), Const.TICKET, 0);
             shoppingCartPersenter.getShoppingCartInfo(uid+"");
 
 

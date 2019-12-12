@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+    <!--支付宝权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -26,6 +29,18 @@
         <activity android:name=".ui.activity.SchoolActivity"></activity>
         <activity android:name=".ui.activity.LoginActivity"/>
         <activity android:name=".ui.activity.ConfirmationActivity"/>
+        <activity android:name=".ui.activity.PayActivity"></activity>
+        <activity android:name=".ui.activity.ProductDetailsActivity"></activity>
+        <activity android:name=".ui.activity.FindActivity"></activity>
+
+
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
     </application>
 
 </manifest>

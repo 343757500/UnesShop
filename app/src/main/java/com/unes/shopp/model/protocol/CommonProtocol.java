@@ -3,6 +3,8 @@ package com.unes.shopp.model.protocol;
 
 import com.unes.shopp.model.bean.AddShopCartInfo;
 import com.unes.shopp.model.bean.ChangeShopCartInfo;
+import com.unes.shopp.model.bean.FetchItemsByIdInfo;
+import com.unes.shopp.model.bean.FetchItemsInfo;
 import com.unes.shopp.model.bean.HomeBannerInfo;
 import com.unes.shopp.model.bean.HomeFetchCatesInfo;
 import com.unes.shopp.model.bean.HomeListItemsInfo;
@@ -74,4 +76,13 @@ public class CommonProtocol extends BaseProtocol {
     public void posthOrder(OnHttpCallback callback, String ticket, String items, String pType, String orderType, long adTime, String msg, int isTaxFree, int point, int couonId, String idCard,String from, String isCommint) {
         super.execute(super.getHttpService().posthOrder(ticket,items,pType,orderType,adTime,msg,isTaxFree,point,couonId,idCard,from,isCommint),callback,IHttpService.TYPE_POSTHORDER,PosthOrderInfo.class);
     }
+
+    public void getFetchItemsInfo(OnHttpCallback callback,String ticket ,String pids) {
+            super.execute(super.getHttpService().getFetchItemsInfo(ticket,pids),callback,IHttpService.TYPE_FENCHITEMS,FetchItemsInfo.class);
+        }
+
+    public void getFodderItemByItemId(OnHttpCallback callback, String ticket, String itemId) {
+        super.execute(super.getHttpService().getFodderItemByItemId(ticket,itemId),callback,IHttpService.TYPE_FENCHITEMSITEM,FetchItemsByIdInfo.class);
+    }
+
 }

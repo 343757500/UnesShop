@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -24,6 +25,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /** Retrofit接口 */
 public interface IHttpService {
@@ -41,6 +44,8 @@ public interface IHttpService {
     int TYPE_MINEINFO= 8;
     int TYPE_ALLPRICE= 9;
     int TYPE_POSTHORDER= 10;
+    int TYPE_FENCHITEMS=11;
+    int TYPE_FENCHITEMSITEM=12;
     int TYPE_OTTOCART= 100;
 
     @POST("homeBanner.json")
@@ -108,5 +113,34 @@ public interface IHttpService {
     Call<JsonObject> posthOrder(@Header("ticket") String ticket, @Field("items")String items,@Field("pType") String pType, @Field("orderType") String orderType,
                                 @Field("adTime") long adTime, @Field("msg")String msg,@Field("isTaxFree") int isTaxFree, @Field("point")int point,
                                 @Field("couonId")int couonId, @Field("idCard")String idCard,@Field("from")String from, @Field("isCommint")String isCommint);
+
+    @FormUrlEncoded
+    @POST("fetchItemsInfo.json")
+    Call<JsonObject> getFetchItemsInfo(@Header("ticket") String header,@Field("ids") String ids);
+
+
+    @FormUrlEncoded
+    @POST("getFodderItemByItemId.json")
+    Call<JsonObject> getFodderItemByItemId(@Header("ticket") String ticket,@Field("itemId") String itemId);
+
+
+
+
+    /**
+     * 下载视频
+     *
+     * @param fileUrl
+     * @return
+     */
+    @Streaming //大文件时要加不然会OOM
+    @GET
+    Call<ResponseBody> downloadFile(@Url String fileUrl);
+
+
+
+
+
+
+
 
 }

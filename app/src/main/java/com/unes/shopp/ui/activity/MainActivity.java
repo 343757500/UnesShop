@@ -16,6 +16,7 @@ import com.unes.shopp.common.ui.GradientTab;
 import com.unes.shopp.ui.NoScrollViewPager;
 import com.unes.shopp.ui.adapter.MyFragmentAdapter;
 import com.unes.shopp.ui.fragment.HomePageFragment;
+import com.unes.shopp.ui.fragment.MineFragment;
 import com.unes.shopp.ui.fragment.SchoolroomFragment;
 import com.unes.shopp.ui.fragment.ShoppingCartFragment;
 
